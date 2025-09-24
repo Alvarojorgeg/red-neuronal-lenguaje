@@ -51,11 +51,14 @@ Si añades `--plot-path outputs/history.png` el script guardará las curvas de a
 1. Arranca el servidor Flask:
 
    ```bash
-   export FLASK_APP=web.app
-   flask run
+   ./scripts/run_web.sh
    ```
 
-   También puedes ejecutar `python web/app.py` para modo *debug*.
+   El script se encarga de exportar las variables de entorno necesarias y, en caso de
+   no encontrar el comando `flask`, instalará automáticamente las dependencias
+   listadas en `requirements.txt`. Si prefieres hacerlo manualmente, puedes ejecutar
+   `export FLASK_APP=web.app` seguido de `flask run`, o lanzar `python web/app.py` para
+   el modo *debug*.
 
 2. Visita `http://127.0.0.1:5000` y completa el formulario. El servidor entrenará el modelo usando 5 000 ejemplos por defecto para ofrecer una respuesta rápida y mostrará las métricas y gráficas generadas.
 
