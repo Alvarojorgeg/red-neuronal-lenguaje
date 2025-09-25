@@ -9,10 +9,19 @@ Este repositorio traslada el trabajo realizado en Google Colab a un proyecto est
 
 ## Requisitos
 
-```bash
-python >= 3.9
-pip install -r requirements.txt
-```
+1. Instala Python 3.9 o superior.
+2. (Opcional pero recomendado) crea un entorno virtual:
+
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # En Windows usa: .venv\Scripts\Activate.ps1
+   ```
+
+3. Instala las dependencias:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 > **Nota**: TensorFlow puede tardar en instalarse dependiendo de la plataforma. Si cuentas con GPU puedes instalar `tensorflow-gpu`.
 
@@ -48,17 +57,26 @@ Si añades `--plot-path outputs/history.png` el script guardará las curvas de a
 
 ## Interfaz web
 
-1. Arranca el servidor Flask:
+1. Arranca el servidor Flask (elige la opción que prefieras):
 
-   ```bash
-   ./scripts/run_web.sh
-   ```
+   - **Windows / macOS / Linux**:
 
-   El script se encarga de exportar las variables de entorno necesarias y, en caso de
-   no encontrar el comando `flask`, instalará automáticamente las dependencias
-   listadas en `requirements.txt`. Si prefieres hacerlo manualmente, puedes ejecutar
-   `export FLASK_APP=web.app` seguido de `flask run`, o lanzar `python web/app.py` para
-   el modo *debug*.
+     ```bash
+     python scripts/run_web.py
+     ```
+
+   - **Bash** (por ejemplo desde Git Bash en Windows):
+
+     ```bash
+     ./scripts/run_web.sh
+     ```
+
+   Ambos comandos configuran automáticamente `PYTHONPATH`, establecen el módulo Flask y
+   lanzan el servidor en `http://127.0.0.1:5000`. Si Flask no está instalado, primero
+   ejecutarán `pip install -r requirements.txt`.
+
+   Como alternativa manual puedes ejecutar `python web/app.py` (modo debug) o
+   `python -m flask --app web.app run` después de exportar/definir `FLASK_APP`.
 
 2. Visita `http://127.0.0.1:5000` y completa el formulario. El servidor entrenará el modelo usando 5 000 ejemplos por defecto para ofrecer una respuesta rápida y mostrará las métricas y gráficas generadas.
 

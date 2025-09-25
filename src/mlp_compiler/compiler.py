@@ -1,5 +1,6 @@
-"""Text to Keras model compiler used in the project."""
 from __future__ import annotations
+
+"""Text to Keras model compiler used in the project."""
 
 import re
 from dataclasses import dataclass
