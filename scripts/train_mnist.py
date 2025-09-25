@@ -2,10 +2,17 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 from typing import Optional
 
 import matplotlib.pyplot as plt
+
+# Ensure the src/ directory is importable when the script is run directly.
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+SRC_DIR = PROJECT_ROOT / "src"
+if SRC_DIR.exists():  # pragma: no branch - guard against missing path
+    sys.path.insert(0, str(SRC_DIR))
 
 from mlp_compiler.training import TrainingResult, build_and_train
 
