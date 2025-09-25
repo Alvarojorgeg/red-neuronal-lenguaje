@@ -1,4 +1,4 @@
-"""Text to Keras model compiler used in the project."""
+    """Text to Keras model compiler used in the project."""
 from __future__ import annotations
 
 import re
