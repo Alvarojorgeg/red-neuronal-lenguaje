@@ -1,6 +1,18 @@
+<<<<<<< HEAD
 """Utilities to transform a textual architecture into a ``tf.keras.Sequential`` model."""
 from __future__ import annotations
 
+=======
+<<<<<<< HEAD
+    """Text to Keras model compiler used in the project."""
+=======
+>>>>>>> origin/main
+from __future__ import annotations
+
+"""Text to Keras model compiler used in the project."""
+
+import re
+>>>>>>> origin/main
 from dataclasses import dataclass
 import re
 from typing import Iterable, List, Sequence
