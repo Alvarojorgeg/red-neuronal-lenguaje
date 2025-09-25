@@ -3,7 +3,9 @@ from __future__ import annotations
 
 import base64
 import io
+import sys
 from dataclasses import dataclass
+from pathlib import Path
 
 from flask import Flask, render_template, request
 import matplotlib
@@ -11,6 +13,11 @@ import matplotlib
 matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+SRC_DIR = PROJECT_ROOT / "src"
+if SRC_DIR.exists():  # pragma: no branch - guard against missing path
+    sys.path.insert(0, str(SRC_DIR))
 
 from mlp_compiler.training import TrainingResult, build_and_train
 
