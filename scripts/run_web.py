@@ -7,6 +7,30 @@ import sys
 from pathlib import Path
 from typing import Final
 
+CONFLICT_MARKER = "<<<<<<< "
+
+
+def _check_merge_conflicts(repo_dir: Path) -> None:
+    """Fail fast if the working tree still has unresolved conflicts."""
+
+    conflict_files = []
+    for path in repo_dir.rglob("*.py"):
+        try:
+            with path.open("r", encoding="utf-8") as fh:
+                for line in fh:
+                    if line.startswith(CONFLICT_MARKER):
+                        conflict_files.append(path)
+                        break
+        except OSError:
+            continue
+
+    if conflict_files:
+        rel = ", ".join(str(p.relative_to(repo_dir)) for p in conflict_files)
+        raise SystemExit(
+            "Se detectaron marcadores de merge sin resolver en: "
+            f"{rel}. Ejecuta 'git restore --source=origin/main <archivo>' o usa scripts/doctor.py."
+        )
+
 
 def ensure_dependencies(requirements: Path) -> None:
     """Install Flask (and the rest of the requirements) if it is missing."""
@@ -34,6 +58,7 @@ def main() -> None:
     src_dir = repo_dir / "src"
 
     ensure_dependencies(requirements)
+    _check_merge_conflicts(repo_dir)
 
     env = os.environ.copy()
     pythonpath = env.get("PYTHONPATH")
