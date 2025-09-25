@@ -25,6 +25,15 @@ Este repositorio traslada el trabajo realizado en Google Colab a un proyecto est
 
 > **Nota**: TensorFlow puede tardar en instalarse dependiendo de la plataforma. Si cuentas con GPU puedes instalar `tensorflow-gpu`.
 
+4. Si encuentras problemas, ejecuta el chequeo automático:
+
+   ```bash
+   python scripts/doctor.py
+   ```
+
+   El script detecta conflictos de merge, dependencias faltantes y problemas de configuración
+   del entorno y sugiere cómo resolverlos.
+
 ## Estructura
 
 ```
